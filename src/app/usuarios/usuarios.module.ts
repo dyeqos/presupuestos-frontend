@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsuariosRoutingModule } from './usuarios-routing.module';
-import { MainComponent } from './pages/main/main.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
   declarations: [
-    MainComponent
+    UsuariosComponent
   ],
   imports: [
     CommonModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
+    MaterialModule
   ]
 })
 export class UsuariosModule { }

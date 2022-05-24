@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppNavbarComponent } from './shared/app-navbar/app-navbar.component';
 
 const routes: Routes = [
   {
@@ -9,8 +8,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    //component: AppNavbarComponent,
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardModule )
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosModule )
   },
   {
     path: '**',
