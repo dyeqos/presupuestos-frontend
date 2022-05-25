@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     UsuariosRoutingModule,
-    MaterialModule
+    MaterialModule,
+   // SharedModule
   ]
 })
 export class UsuariosModule { }
