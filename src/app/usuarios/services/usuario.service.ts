@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { UsuarioList } from '../interfaces/usuario.interfaces';
+import { Usuario, UsuarioResponse } from '../interfaces/usuario.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,15 @@ export class UsuarioService {
   
   getUsuarios(){
     const url = `${this.baseUrl}/usuarios/`;
-    console.log(url)
-    return this.http.get<UsuarioList>(url);
+    return this.http.get<UsuarioResponse>(url);
+  }
+
+  postUsuario( datos:Usuario ){
+    const url = `${this.baseUrl}/usuarios/`;
+    // let header = {
+    //   headers: new HttpHeaders()
+    //     .set('Authorization',  `Basic ${}`)
+    // }
+    return this.http.post(url,datos);
   }
 }

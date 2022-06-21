@@ -11,4 +11,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     vertical-align: middle;
 }
 
+.modify {
+    background-color: rgb(235, 187, 84);
+    color: #fff;
+}
 
+.delete {
+    background-color: rgb(235, 69, 69);
+    color: #fff;
+}

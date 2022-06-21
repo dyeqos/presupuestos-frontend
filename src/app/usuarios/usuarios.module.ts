@@ -2,20 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsuariosRoutingModule } from './usuarios-routing.module';
-import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { MaterialModule } from '../material/material.module';
-import { SharedModule } from '../shared/shared.module';
 
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { UsuariosModalComponent } from './pages/usuarios-modal/usuarios-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    UsuariosComponent
+    UsuariosComponent,
+    UsuariosModalComponent
   ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
+    ReactiveFormsModule,
     MaterialModule,
-   // SharedModule
   ]
 })
 export class UsuariosModule { }

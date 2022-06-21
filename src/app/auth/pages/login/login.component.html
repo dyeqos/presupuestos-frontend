@@ -1,49 +1,47 @@
-<form>
+<form autocomplete = "off"
+      [formGroup]  = "formLogin"
+      (ngSubmit)   = "ingresar()">
     <mat-form-field appearance="legacy">
         <mat-label>Correo</mat-label>
-        <input 
-            matInput
-            type="email"
-            required
-        >
+        <input matInput
+               formControlName = "usuario"
+               type="email"
+               required>
         <mat-error>
-            Please provide a valid email address
+            Formato de Correo Incorrecto
         </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
-        <input 
-            matInput
-            [type]="hide ? 'password' : 'text'"
-            required
-        >
-        <button 
-            mat-icon-button 
-            matSuffix 
-            (click)="hide = !hide"
-            
-        >
+        <input matInput
+               formControlName = "password"
+               [type]="hide ? 'password' : 'text'"
+               required>
+
+        <button mat-icon-button 
+                matSuffix 
+                type="button"
+                (click)="hide = !hide">
             <mat-icon>
                 {{hide ? 'visibility_off' : 'visibility'}}
             </mat-icon>
         </button>
+        <mat-error>
+            Contraseña mínima de 6 carácteres
+        </mat-error>
     </mat-form-field>
 
-    <button
-        mat-raised-button
-        class="mt-4"
-        color="primary"
-        (click)="ingresar()"
-    >
+    <button mat-raised-button
+            class="mt-4"
+            color="primary"
+            type ="submit">
         Ingresar
     </button>
 
-    <button 
-        mat-button
+    <button mat-button
         class="mt-4"
-        routerLink="/auth/registro"
-    >
+        routerLink="/auth/registro">
         Crear cuenta
     </button>
 

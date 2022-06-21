@@ -1,4 +1,4 @@
-export interface UsuarioList{
+export interface UsuarioResponse{
     ok: Boolean,
     msg: String,
     data?: Usuario[]
