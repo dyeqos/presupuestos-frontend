@@ -1,4 +1,4 @@
 export interface authResponse {
-    ok: Boolean,
-    msg: String
+    ok: boolean,
+    msg: string
 }

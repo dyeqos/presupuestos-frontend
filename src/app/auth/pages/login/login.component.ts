@@ -29,16 +29,16 @@ export class LoginComponent implements OnInit {
 
     if( this.formLogin.invalid ){
       this.formLogin.markAllAsTouched();
-      console.log(this.formLogin)
       return;
     }
     const { usuario, password } = this.formLogin.value;
     this.authService.login(usuario, password)
-      .subscribe( resp => {
-        if( resp.ok ){
+      .subscribe( ok => {
+        if( ok === true ){
           this.router.navigate(['/dashboard']);
         }else{
-          this.abrirSnackBar(resp.msg);
+          //Error autenticación
+          this.abrirSnackBar(ok);
         }
       });
   }

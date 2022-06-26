@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidarTokenGuard } from './guards/validar-token.guard';
+import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [
   {
@@ -8,11 +10,17 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardModule )
+    component: PagesComponent,
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardModule ),
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
   },
   {
     path: 'usuarios',
-    loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosModule )
+    component: PagesComponent,
+    loadChildren: () => import('./pages/usuarios/usuarios.module').then( m => m.UsuariosModule ),
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
   },
   {
     path: '**',
