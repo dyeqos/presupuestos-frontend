@@ -1,18 +1,24 @@
 export interface UsuarioResponse{
-    ok: Boolean,
-    msg: String,
+    ok: boolean,
+    msg: string,
     data?: Usuario[]
 }
 export interface Usuario {
-    nombre: String,
-    paterno: String,
-    materno: String,
-    correo: String,
-    rol: String,
-    estado: Boolean,
-    google: Boolean,
+    nombre: string,
+    paterno: string,
+    materno: string,
+    correo: string,
+    rol: Rol,
+    estado: boolean,
+    google: boolean,
+    password: string,
     aud_estado: Number,
     aud_fecha: Date,
-    aud_usuario: String,
-    uid: String
+    aud_usuario: string,
+    uid: string
+}
+
+interface Rol{
+    _id: string,
+    nombre: string
 }

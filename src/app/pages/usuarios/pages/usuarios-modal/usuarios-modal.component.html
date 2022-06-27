@@ -16,40 +16,45 @@
           <mat-label>Nombre</mat-label>
           <input matInput
                  formControlName = "nombre"
-                 placeholder="Ej. Juan" 
-                 value="">
+                 >
+          <mat-error>
+            Revise el Nombre
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Apellido Paterno</mat-label>
           <input matInput
                  formControlName = "paterno"
-                 placeholder="Ej. Perez" 
-                 value="">
+                 >
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Apellido Materno</mat-label>
           <input matInput
                  formControlName = "materno"
-                 placeholder="Ej. Perez" 
-                 value="">
+                 >
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Correo</mat-label>
           <input matInput
                  formControlName = "correo"
-                 placeholder="Ej. email@correo.com" 
-                 value="">
+                 >
+          <mat-error>
+            sdafadf
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Rol de Usuario</mat-label>
-          <input matInput
-                 formControlName = "rol"
-                 placeholder="Ej. Administrador" 
-                 value="">
+          <mat-select
+            formControlName = "rol">
+            <mat-option *ngFor="let rol of roles" 
+                        [value]="rol.uid">
+                        {{ rol.nombre }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         
       </mat-card-content>

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Usuario } from '../../interfaces/usuario.interfaces';
 import { UsuarioService } from '../../services/usuario.service';
+import { ParametrosService } from '../../../../services/parametros.service';
+import { Usuario } from '../../interfaces/usuario.interfaces';
 
 import { UsuariosModalComponent } from '../usuarios-modal/usuarios-modal.component';
+import { parametro } from 'src/app/interfaces/parametros.interfaces';
  
 @Component({
   selector: 'app-usuarios',
@@ -16,21 +18,34 @@ export class UsuariosComponent implements OnInit {
 
   displayHeader: string[] = ["nombre","correo","rol","opcion"];
   usuariosList!: Usuario[];
+  rolesList!: parametro[];
 
   constructor( private usuarioService: UsuarioService,
+               private parametrosService: ParametrosService,
                public dialog: MatDialog ) { }
  
   ngOnInit(): void {
     this.getUsuarios();
+    this.getRoles();
    
+  }
+  getRoles(){
+    this.parametrosService.getRoles()
+      .subscribe(resp=> {
+        if( resp.ok === true ){
+          this.rolesList = resp.data!;
+        }else{
+          this.rolesList = [];
+        }
+      })
   }
 
   getUsuarios(){
 
     this.usuarioService.getUsuarios()
       .subscribe( resp => {
-        if( resp.data ){
-          this.usuariosList = resp.data;
+        if( resp.ok === true ){
+          this.usuariosList = resp.data!;
         }else{
           this.usuariosList = [];
         }
@@ -39,10 +54,10 @@ export class UsuariosComponent implements OnInit {
 
   abrirModal(){
     this.dialog.open( UsuariosModalComponent, {
-        width: "500",
+        width: "500px",
         disableClose: false,
         data: {
-          nombre : 'diego'
+          roles : this.rolesList
         }
     })
   }
