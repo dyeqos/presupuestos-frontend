@@ -11,47 +11,70 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class UsuariosModalComponent implements OnInit {
 
+  //comboBox roles
+  roles = this.data.roles;
+  usuario:Usuario = this.data.usuario;
+
   formUsuario: FormGroup = this.fb.group({
-    nombre   : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)] ],
-    paterno  : ['', [Validators.minLength(3), Validators.maxLength(30)] ],
-    materno  : ['', [Validators.minLength(3), Validators.maxLength(30)] ],
-    correo   : ['', [Validators.required, Validators.email] ],
-    rol      : ['', [Validators.required] ],
+    nombre   : [ '' , [Validators.required, Validators.minLength(3), Validators.maxLength(30)] ],
+    paterno  : [ '', [Validators.minLength(3), Validators.maxLength(30)] ],
+    materno  : [ '', [Validators.minLength(3), Validators.maxLength(30)] ],
+    correo   : [ '', [Validators.required, Validators.email] ],
+    rol      : [ '', [Validators.required] ],
     password : ['123456', [Validators.required, Validators.minLength(6)] ],
   });
   
-  //comboBox roles
-  roles = this.data.roles;
-
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,
                private fb: FormBuilder,
                private usuarioService: UsuarioService ) {}
 
   ngOnInit(): void {
+    this.cargarFormulario();
+    console.log(this.usuario)
+  }
+
+  cargarFormulario(){
+    if(this.usuario){
+      this.formUsuario.controls['nombre'].setValue(this.usuario.nombre);
+      this.formUsuario.controls['paterno'].setValue(this.usuario.paterno);
+      this.formUsuario.controls['materno'].setValue(this.usuario.materno);
+      this.formUsuario.controls['correo'].setValue(this.usuario.correo);
+      this.formUsuario.controls['rol'].setValue(this.usuario.rol._id);
+    }
   }
 
   guardarUsuario(){
+
     if( this.formUsuario.invalid ){
       this.formUsuario.markAllAsTouched();
-      console.log( this.formUsuario )
       return;
     }
     
-    const body = {
-      nombre: this.formUsuario.controls['nombre'].value.trim().toUpperCase(),
-      paterno: this.formUsuario.controls['paterno'].value.trim().toUpperCase(),
-      materno: this.formUsuario.controls['materno'].value.trim().toUpperCase(),
-      correo: this.formUsuario.controls['correo'].value.trim().toLowerCase(),
-      rol: this.formUsuario.controls['rol'].value,
-      password: this.formUsuario.controls['password'].value
-    }
+      this.usuario.nombre = this.formUsuario.controls['nombre'].value.trim().toUpperCase();
+      this.usuario.paterno = this.formUsuario.controls['paterno'].value.trim().toUpperCase();
+      this.usuario.materno = this.formUsuario.controls['materno'].value.trim().toUpperCase();
+      this.usuario.correo = this.formUsuario.controls['correo'].value.trim().toLowerCase();
+      this.usuario.rol = this.formUsuario.controls['rol'].value;
+      this.usuario.password = this.formUsuario.controls['password'].value;
+    
+    if( typeof this.usuario.uid !== 'undefined' ){
 
-
-    this.usuarioService.postUsuario(body)
-      .subscribe( resp => {
-        console.log(resp);
+      this.usuarioService.putUsuario(this.usuario)
+        .subscribe( resp => {
+          console.log(resp);
       });
+
+    }else{
+
+      console.log('post')
+      this.usuarioService.postUsuario(this.usuario)
+        .subscribe( resp => {
+          console.log(resp);
+      });
+      
+    }
     
   }
+
  
 }

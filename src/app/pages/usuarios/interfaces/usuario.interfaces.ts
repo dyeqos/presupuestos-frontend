@@ -9,13 +9,10 @@ export interface Usuario {
     materno: string,
     correo: string,
     rol: Rol,
-    estado: boolean,
-    google: boolean,
-    password: string,
-    aud_estado: Number,
-    aud_fecha: Date,
-    aud_usuario: string,
-    uid: string
+    estado?: boolean,
+    google?: boolean,
+    password?: string,
+    uid?: string
 }
 
 interface Rol{

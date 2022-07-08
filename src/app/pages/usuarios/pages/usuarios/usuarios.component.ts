@@ -19,6 +19,17 @@ export class UsuariosComponent implements OnInit {
   displayHeader: string[] = ["nombre","correo","rol","opcion"];
   usuariosList!: Usuario[];
   rolesList!: parametro[];
+  usuario: Usuario = {
+    nombre:'',
+    paterno:'',
+    materno:'',
+    correo:'',
+    uid:'',
+    rol: {
+      _id:'',
+      nombre:''
+    }
+  }
 
   constructor( private usuarioService: UsuarioService,
                private parametrosService: ParametrosService,
@@ -29,6 +40,7 @@ export class UsuariosComponent implements OnInit {
     this.getRoles();
    
   }
+
   getRoles(){
     this.parametrosService.getRoles()
       .subscribe(resp=> {
@@ -41,7 +53,6 @@ export class UsuariosComponent implements OnInit {
   }
 
   getUsuarios(){
-
     this.usuarioService.getUsuarios()
       .subscribe( resp => {
         if( resp.ok === true ){
@@ -60,6 +71,26 @@ export class UsuariosComponent implements OnInit {
           roles : this.rolesList
         }
     })
+  }
+
+  editar( uid: string){
+
+    this.usuarioService.getUsuarios(uid)
+      .subscribe( resp => {
+        if(resp.ok === true) {
+
+          this.dialog.open( UsuariosModalComponent, {
+            width: "500px",
+            disableClose: false,
+            data: {
+              roles : this.rolesList,
+              usuario: resp.data! 
+            }
+          })
+          
+        }
+      })
+    
   }
 
 

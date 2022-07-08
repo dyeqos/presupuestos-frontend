@@ -38,7 +38,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }else{
           //Error autenticación
-          this.abrirSnackBar(ok);
+          if( ok.status === 0 ) {
+            this.abrirSnackBar("No hay conexión con el Servidor");  
+          }else{
+            this.abrirSnackBar( ok.error.msg );
+          }
         }
       });
   }
