@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<div mat-dialog-content>
+  ¿Desea eliminar el Registro?
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button 
+          color="primary"
+          (click)="eliminar()">
+          Borrar</button>
+</div>

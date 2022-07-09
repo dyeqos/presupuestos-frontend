@@ -27,6 +27,9 @@
           <input matInput
                  formControlName = "paterno"
                  >
+          <mat-error>
+            Revise el Apellido
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -34,6 +37,9 @@
           <input matInput
                  formControlName = "materno"
                  >
+          <mat-error>
+            Revise el Apellido
+          </mat-error>                 
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -42,7 +48,7 @@
                  formControlName = "correo"
                  >
           <mat-error>
-            sdafadf
+            Revise el Correo
           </mat-error>
         </mat-form-field>
 
@@ -55,12 +61,15 @@
                         {{ rol.nombre }}
             </mat-option>
           </mat-select>
+          <mat-error>
+            Revise el Rol de Usuario
+          </mat-error>
         </mat-form-field>
         
       </mat-card-content>
       
       <mat-card-actions>
-        <button mat-button>Cancelar</button>
+        <button mat-button mat-dialog-close>Cancelar</button>
         <button mat-raised-button
                 color="primary"
                 type="submit">Guardar</button>

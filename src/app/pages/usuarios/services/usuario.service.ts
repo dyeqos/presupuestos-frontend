@@ -26,7 +26,7 @@ export class UsuarioService {
     const headers = new HttpHeaders()
       .set('x-token', this.authService.token )
     
-    return this.http.post( url, datos, { headers } );
+    return this.http.post<UsuarioResponse>( url, datos, { headers } );
   }
 
   putUsuario( datos: Usuario ){
@@ -34,6 +34,19 @@ export class UsuarioService {
     const headers = new HttpHeaders()
       .set('x-token', this.authService.token )
     
-    return this.http.put( url, datos, { headers } );
+    return this.http.put<UsuarioResponse>( url, datos, { headers } );
   }
+
+  deleteUsuario( uid: string ){
+    const url = `${this.baseUrl}/usuarios/`;
+    const option = {
+      headers : new HttpHeaders()
+        .set( 'x-token', this.authService.token )
+        .set( 'content-type', 'application/json' ),
+      body: { uid }
+    }
+    
+    return this.http.delete<UsuarioResponse>( url, option);
+  }
+
 }
