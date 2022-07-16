@@ -6,7 +6,7 @@ import { ParametrosService } from '../../../../services/parametros.service';
 import { Usuario } from '../../interfaces/usuario.interfaces';
 
 import { UsuariosModalComponent } from '../usuarios-modal/usuarios-modal.component';
-import { parametro } from 'src/app/interfaces/parametros.interfaces';
+import { Parametro } from 'src/app/interfaces/parametros.interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertaBorradoComponent } from 'src/app/components/alerta-borrado/alerta-borrado.component';
  
@@ -20,7 +20,7 @@ export class UsuariosComponent implements OnInit {
 
   displayHeader: string[] = ["nombre","correo","rol","opcion"];
   usuariosList!: Usuario[];
-  rolesList!: parametro[];
+  rolesList!: Parametro[];
 
   constructor( private usuarioService: UsuarioService,
                private parametrosService: ParametrosService,

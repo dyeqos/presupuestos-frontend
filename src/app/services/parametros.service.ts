@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
-import { parametroResponse } from '../interfaces/parametros.interfaces';
+import { ParametroResponse } from '../interfaces/parametros.interfaces';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +17,12 @@ export class ParametrosService {
 
     const url = `${this.baseUrl}/roles`;
 
-    return this.http.get<parametroResponse>(url);
+    return this.http.get<ParametroResponse>(url);
+  }
+
+  getTiposActivos(){
+    const url = `${this.baseUrl}/tipos-activos`;
+    return this.http.get<ParametroResponse>(url);
   }
 
 

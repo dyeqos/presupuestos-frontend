@@ -1,10 +1,10 @@
-export interface parametroResponse {
+export interface ParametroResponse {
     ok: boolean,
     msg: string,
-    data?: parametro[]
+    data?: Parametro[]
 }
 
-export interface parametro {
+export interface Parametro {
     uid: string,
     tipo: string,
     nombre: string

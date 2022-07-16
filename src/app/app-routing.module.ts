@@ -23,6 +23,20 @@ const routes: Routes = [
     canLoad: [ ValidarTokenGuard ]
   },
   {
+    path: 'cuentas',
+    component: PagesComponent,
+    loadChildren: () => import('./pages/cuentas/cuentas.module').then( m => m.CuentasModule ),
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
+  },
+  {
+    path: 'activos',
+    component: PagesComponent,
+    loadChildren: () => import('./pages/activos/activos.module').then( m => m.ActivosModule ),
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
+  },
+  {
     path: '**',
     redirectTo: 'auth'
   }

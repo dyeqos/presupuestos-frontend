@@ -1,0 +1,44 @@
+<div class="row">
+  <h1>
+    <mat-icon class="titulo">store_mall_directory</mat-icon>
+    <span> Cotizaciones </span>
+    <button mat-raised-button 
+            color="primary" 
+            (click)="abrirModal()"
+            class="titulo">
+      <mat-icon>add</mat-icon> Agregar Activo
+    </button>
+  </h1>
+</div>
+
+<div *ngIf="activosList && activosList!=[]; else activoVacio" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let activo of activosList" cdkDrag>
+      {{activo.nombre}} <span class="spacer"></span> {{activo.costo |  number:'1.2-2' }} Bs
+      <button mat-icon-button [matMenuTriggerFor]="menu" >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item
+                disabled
+                (click)="editar(activo.uid!)">
+          <mat-icon>shopping_cart</mat-icon>
+          <span>Comprar</span>
+        </button>
+        <button mat-menu-item
+                (click)="editar(activo.uid!)">
+          <mat-icon>edit</mat-icon>
+          <span>Modificar</span>
+        </button>
+        <button mat-menu-item
+                (click)="eliminar(activo.uid!)">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>   
+    </div>
+</div>
+<ng-template #activoVacio class="example-list">
+  <div class="example-box">
+    Agrege activos para ser cotizados...
+  </div>
+</ng-template>

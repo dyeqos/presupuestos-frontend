@@ -13,7 +13,7 @@ export class UsuariosModalComponent implements OnInit {
 
   //comboBox roles
   roles = this.data.roles;
-  usuario:Usuario = this.data.usuario || {};
+  usuario:Usuario = this.data.usuario || {}; 
 
   formUsuario: FormGroup = this.fb.group({
     nombre   : [ '', [Validators.required, Validators.minLength(3), Validators.maxLength(30)] ],
@@ -40,12 +40,13 @@ export class UsuariosModalComponent implements OnInit {
       this.formUsuario.controls['paterno'].setValue(this.usuario.paterno);
       this.formUsuario.controls['materno'].setValue(this.usuario.materno);
       this.formUsuario.controls['correo'].setValue(this.usuario.correo);
+      debugger;
       this.formUsuario.controls['rol'].setValue(this.usuario.rol._id);
     }
   }
 
   guardarUsuario(){
-
+ 
     if( this.formUsuario.invalid ){
       this.formUsuario.markAllAsTouched();
       return;
@@ -68,8 +69,7 @@ export class UsuariosModalComponent implements OnInit {
           }
       });
     }else{
-      console.log(this.usuario);
-
+     
       this.usuarioService.postUsuario(this.usuario)
         .subscribe( resp => {
           if(resp.ok===true){

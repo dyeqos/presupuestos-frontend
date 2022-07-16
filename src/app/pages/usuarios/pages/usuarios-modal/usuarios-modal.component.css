@@ -2,11 +2,3 @@ mat-form-field {
     display: block;
     margin-top: 10px;
 }
-
-.uppercase{
-  text-transform: uppercase;
-}
-
-.lowercase{
-  text-transform: lowercase;
-}
