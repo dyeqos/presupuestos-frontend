@@ -11,12 +11,10 @@ export class ParametrosService {
 
   private baseUrl: string = environment.baseUrl + "/params";
   
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient ) { }
 
   getRoles(){
-
     const url = `${this.baseUrl}/roles`;
-
     return this.http.get<ParametroResponse>(url);
   }
 
@@ -25,5 +23,19 @@ export class ParametrosService {
     return this.http.get<ParametroResponse>(url);
   }
 
+  getBancos(){
+    const url = `${this.baseUrl}/bancos`;
+    return this.http.get<ParametroResponse>(url);
+  }
+
+  getTiposCuentas(){
+    const url = `${this.baseUrl}/cuentas`;
+    return this.http.get<ParametroResponse>(url);
+  }
+
+  getTiposIngresos(){
+    const url = `${this.baseUrl}/ingresos`;
+    return this.http.get<ParametroResponse>(url);
+  }
 
 }

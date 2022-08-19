@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { ActivoService } from '../../services/activo.service';
 
 import { Activo } from '../../interfaces/activos.interfaces';
-import { Parametro } from 'src/app/interfaces/parametros.interfaces';
 
 @Component({
   selector: 'app-activos-modal',
@@ -16,12 +15,12 @@ import { Parametro } from 'src/app/interfaces/parametros.interfaces';
 export class ActivosModalComponent implements OnInit {
 
   tipo_activo = this.data.tiposActivos;
-  date = new Date();
+  date = new Date(); 
   activo: Activo = this.data.activo || {};
 
   formActivo: FormGroup = this.fb.group({
     nombre     : [ '', [Validators.required, Validators.minLength(3), Validators.maxLength(30)] ],
-    detalle    : [ '', [Validators.required, Validators.minLength(3), Validators.maxLength(50)] ],
+    detalle    : [ '', [Validators.required, Validators.minLength(3), Validators.maxLength(150)] ],
     costo      : [ '', [Validators.required, Validators.min(0) ] ],
     fecha      : [ {value: this.date, disabled: true}, [Validators.required] ],
     tipo_activo: [ '', [Validators.required] ],
@@ -33,7 +32,6 @@ export class ActivosModalComponent implements OnInit {
               private activoService: ActivoService) { }
 
   ngOnInit(): void {
-    console.log( this.data.activo )
     this.cargarFormulario();
   }
 

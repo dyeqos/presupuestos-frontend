@@ -40,7 +40,6 @@ export class UsuariosModalComponent implements OnInit {
       this.formUsuario.controls['paterno'].setValue(this.usuario.paterno);
       this.formUsuario.controls['materno'].setValue(this.usuario.materno);
       this.formUsuario.controls['correo'].setValue(this.usuario.correo);
-      debugger;
       this.formUsuario.controls['rol'].setValue(this.usuario.rol._id);
     }
   }

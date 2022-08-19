@@ -26,23 +26,44 @@
             </a>
             <a routerLink="/cuentas"
                 mat-list-item
-                disabled=""
                 (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>credit_card</mat-icon>
                 <span>Cuentas Bancarias</span>
             </a>
+
             <mat-accordion>
                 <mat-expansion-panel class="mat-elevation-z0">
                     <mat-expansion-panel-header>
-                        
-                            <mat-icon mat-list-icon>local_atm</mat-icon>
-                            <span>Activos</span>
+                        <mat-icon mat-list-icon>swap_horiz</mat-icon>
+                        <span>Movimientos</span>
+                    </mat-expansion-panel-header>
+                    
+                    <a routerLink="/movimientos/ingresos"
+                        mat-list-item
+                        (click)="sidenav.toggle()">
+                        <mat-icon mat-list-icon>arrow_back_ios</mat-icon>
+                        <span>Ingresos</span>
+                    </a>
+                    <a routerLink="/movimientos/egresos"
+                        mat-list-item
+                        (click)="sidenav.toggle()">
+                        <mat-icon mat-list-icon>arrow_forward_ios</mat-icon>
+                        <span>Egresos</span>
+                    </a>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-icon mat-list-icon>local_atm</mat-icon>
+                        <span>Activos</span>
                     </mat-expansion-panel-header>
                     
                     <a routerLink="/activos"
-                    mat-list-item
-                    (click)="sidenav.toggle()">
-                    <mat-icon mat-list-icon>attach_money</mat-icon>
+                        mat-list-item
+                        (click)="sidenav.toggle()">
+                        <mat-icon mat-list-icon>attach_money</mat-icon>
                         <span>Mis activos</span>
                     </a>
                     <a routerLink="/activos/cotizacion"

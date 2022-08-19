@@ -1,12 +1,48 @@
 <div class="row">
-
+  <div class="col">
     <h1>
       <mat-icon class="titulo">credit_card</mat-icon>
-      <span> Cuentas Bancarias </span>
-      <button mat-raised-button 
-              color="primary" 
-              class="titulo">
-        <mat-icon>add</mat-icon> Agregar Cuenta
-      </button>
+      <span> Cuentas </span> 
     </h1>
+    <button mat-raised-button 
+      color="primary"
+      (click)="abrirModal()">
+      <mat-icon>add</mat-icon> Agregar Cuenta
+    </button>
   </div>
+</div>
+
+
+
+<table *ngIf="cuentasList" mat-table [dataSource]="cuentasList" class="mat-elevation-z8 matTable">
+
+  <ng-container matColumnDef="banco">
+    <th mat-header-cell *matHeaderCellDef> BANCO </th>
+    <td mat-cell *matCellDef="let cuenta">{{cuenta.banco.nombre}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numero_cuenta">
+    <th mat-header-cell *matHeaderCellDef> N° DE CUENTA </th>
+    <td mat-cell *matCellDef="let cuenta"> {{cuenta.numero_cuenta}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="opcion">
+    <th mat-header-cell *matHeaderCellDef> OPCIONES </th>
+    <td mat-cell *matCellDef="let cuenta"> 
+      <button mat-icon-button 
+              (click)="editar(cuenta.uid)"
+              color="accent">
+        <mat-icon>edit</mat-icon> 
+      </button>
+      <button mat-icon-button 
+              (click)="eliminar(cuenta.uid)"
+              disabled=""
+              color="accent">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayHeader"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayHeader;"></tr>
+</table>

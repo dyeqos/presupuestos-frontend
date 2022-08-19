@@ -1,0 +1,6 @@
+.mat-column-numero_cuenta, .mat-column-banco{
+    padding-right: 1px; 
+}
+.mat-column-opcion {
+    text-align: right;
+}

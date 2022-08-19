@@ -11,7 +11,7 @@
   </h1>
 </div>
 
-<div *ngIf="activosList && activosList!=[]; else activoVacio" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+<div *ngIf="activosList && activosList.length > 0; else activoVacio" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let activo of activosList" cdkDrag>
       {{activo.nombre}} <span class="spacer"></span> {{activo.costo |  number:'1.2-2' }} Bs
       <button mat-icon-button [matMenuTriggerFor]="menu" >
@@ -19,8 +19,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item
-                disabled
-                (click)="editar(activo.uid!)">
+                (click)="comprar(activo.uid!)">
           <mat-icon>shopping_cart</mat-icon>
           <span>Comprar</span>
         </button>

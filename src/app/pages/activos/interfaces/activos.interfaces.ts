@@ -11,7 +11,7 @@ export interface Activo {
     costo: number,
     fecha: string,
     posicion?: number,
-    uid?:string
+    uid?:string,
     estado_activo?: number
 }
 

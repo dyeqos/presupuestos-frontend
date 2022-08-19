@@ -19,7 +19,7 @@ export class AuthService {
   get token(){
     return this._Token;
   }
-  
+   
   constructor( private http: HttpClient ) { }
 
   login( correo: string, password: string){

@@ -7,16 +7,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex: 1 1 auto;
 }
 
+h1 {
+    display: inline-block;
+}
+
+h1 + button{
+    float: right;
+}
 .titulo,.titulo + span{
     vertical-align: middle;
 }
 
-.modify {
-    background-color: rgb(235, 187, 84);
-    color: #fff;
+.matTable {
+    width: 100%;
 }
 
-.delete {
-    background-color: rgb(235, 69, 69);
-    color: #fff;
+.numero-right-align {
+    text-align: right;
+}
+
+input.numero-right-align::-webkit-outer-spin-button,
+input.numero-right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.numero-right-align {
+    -moz-appearance: textfield;
 }

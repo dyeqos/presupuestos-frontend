@@ -7,11 +7,13 @@ import { MaterialModule } from '../../material/material.module';
 
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { UsuariosModalComponent } from './pages/usuarios-modal/usuarios-modal.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 @NgModule({
   declarations: [
     UsuariosComponent,
-    UsuariosModalComponent
+    UsuariosModalComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,

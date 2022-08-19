@@ -15,8 +15,18 @@ export class ActivoService {
   constructor( private http: HttpClient,
                private authService: AuthService ) { }
 
-  getActivos(uid: String = ''){
-    const url = `${this.baseUrl}/activos/cotizacion/${uid}`;
+  getActivo(uid: String){
+    const url=`${this.baseUrl}/activos/${uid}`;
+    return this.http.get<ActivosResponse>(url);
+  }
+
+  getActivos(){
+    const url=`${this.baseUrl}/activos/`;
+    return this.http.get<ActivosResponse>(url);
+  }
+
+  getCotizaciones(){
+    const url=`${this.baseUrl}/activos/cotizacion/`;
     return this.http.get<ActivosResponse>(url);
   }
 

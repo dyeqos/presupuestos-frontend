@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
 import { PagesComponent } from './pages/pages.component';
+import { MovimientosModule } from './pages/movimientos/movimientos.module';
 
 const routes: Routes = [
   {
@@ -33,6 +34,20 @@ const routes: Routes = [
     path: 'activos',
     component: PagesComponent,
     loadChildren: () => import('./pages/activos/activos.module').then( m => m.ActivosModule ),
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
+  },
+  {
+    path: 'compras',
+    component: PagesComponent,
+    loadChildren: () => import('./pages/compras/compras.module').then( m => m.ComprasModule ),
+    canActivate: [ ValidarTokenGuard ],
+    canLoad: [ ValidarTokenGuard ]
+  },
+  {
+    path: 'movimientos',
+    component: PagesComponent,
+    loadChildren: () => import('./pages/movimientos/movimientos.module').then( m => m.MovimientosModule ),
     canActivate: [ ValidarTokenGuard ],
     canLoad: [ ValidarTokenGuard ]
   },

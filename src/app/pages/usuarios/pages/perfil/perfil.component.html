@@ -1,0 +1,116 @@
+<mat-card *ngIf="usuario && roles   ">
+
+    <form autocomplete = "off"
+          [formGroup]  = "formUsuario"
+          (ngSubmit)   = "guardarUsuario()">
+          
+      <mat-card-header>
+        <mat-card-title>Mi Perfil</mat-card-title>
+        <mat-card-subtitle>Modificar</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+   
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput
+                    formControlName = "nombre"
+                    >
+            <mat-error>
+                Revise el Nombre
+            </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+            <mat-label>Apellido Paterno</mat-label>
+            <input matInput
+                    formControlName = "paterno"
+                    >
+            <mat-error>
+                Revise el Apellido
+            </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+            <mat-label>Apellido Materno</mat-label>
+            <input matInput
+                   formControlName = "materno"
+                   >
+            <mat-error>
+              Revise el Apellido
+            </mat-error>                 
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+            <mat-label>Correo</mat-label>
+            <input matInput
+                   formControlName = "correo"
+                   >
+            <mat-error>
+              Revise el Correo
+            </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+            <mat-label>Rol de Usuario</mat-label>
+            <mat-select
+              formControlName = "rol">
+              <mat-option *ngFor="let rol of roles" 
+                          [value]="rol.uid">
+                          {{ rol.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              Revise el Rol de Usuario
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Nuevo Password</mat-label>
+            <input matInput
+                   formControlName = "password"
+                   [type]="hide ? 'password' : 'text'"
+                   required>
+    
+            <button mat-icon-button 
+                    matSuffix 
+                    type="button"
+                    (click)="hide = !hide">
+                <mat-icon>
+                    {{hide ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+            </button>
+            <mat-error>
+                Contraseña mínima de 6 carácteres
+            </mat-error>
+        </mat-form-field>
+          
+        <mat-form-field appearance="fill">
+            <mat-label>Repetir Password</mat-label>
+            <input matInput
+                   formControlName = "password2"
+                   [type]="hide2 ? 'password' : 'text'"
+                   required>
+    
+            <button mat-icon-button 
+                    matSuffix 
+                    type="button"
+                    (click)="hide2 = !hide2">
+                <mat-icon>
+                    {{hide2 ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+            </button>
+            <mat-error>
+                No son iguales las contraseñas
+            </mat-error>
+        </mat-form-field>
+
+        </mat-card-content>
+        
+        <mat-card-actions>
+          <button mat-raised-button
+                  color="primary"
+                  type="submit">Guardar</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>

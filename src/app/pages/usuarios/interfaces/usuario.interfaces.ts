@@ -3,6 +3,11 @@ export interface UsuarioResponse{
     msg: string,
     data?: Usuario[]
 }
+export interface PerfilResponse{
+    ok: boolean,
+    msg: string,
+    data?: Usuario
+}
 export interface Usuario {
     nombre: string,
     paterno: string,

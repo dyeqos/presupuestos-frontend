@@ -1,0 +1,83 @@
+<mat-card>
+     
+    <form autocomplete = "off"
+        [formGroup]  = "formCuenta"
+        (ngSubmit)   = "guardarCuenta()">
+          
+      <mat-card-header>
+        <mat-card-title>Cuenta</mat-card-title>
+        <mat-card-subtitle>Nuevo</mat-card-subtitle>
+    </mat-card-header>
+    <mat-dialog-content>
+    <mat-card-content>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Banco</mat-label>
+            <mat-select
+              formControlName = "banco">
+              <mat-option *ngFor="let banco of bancos" 
+                          [value]="banco.uid">
+                          {{ banco.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Revise el Banco
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Número de Cuenta</mat-label>
+            <input matInput
+                   formControlName = "numero_cuenta">
+            <mat-error>
+              Revise el Número de Cuenta
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo de Cuenta</mat-label>
+            <mat-select
+              formControlName = "tipo_cuenta">
+              <mat-option *ngFor="let tipo_cuenta of tipo_cuentas" 
+                          [value]="tipo_cuenta.uid">
+                          {{ tipo_cuenta.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Revise el Tipo de Cuenta
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Usuario</mat-label>
+            <mat-select
+              formControlName = "usuario">
+              <mat-option *ngFor="let usuario of usuarios" 
+                          [value]="usuario.uid">
+                          {{ usuario.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Revise el Usuario
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Descripción Cuenta</mat-label>
+          <input matInput
+                 formControlName = "descripcion">
+          <mat-error>
+            Revise la descripción de la cuenta
+          </mat-error>
+        </mat-form-field>
+  
+        </mat-card-content>
+      </mat-dialog-content>
+        <mat-card-actions>
+          <button mat-button mat-dialog-close>Cancelar</button>
+          <button mat-raised-button
+                  color="primary"
+                  type="submit">Guardar</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>

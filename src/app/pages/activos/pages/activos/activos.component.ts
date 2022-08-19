@@ -8,6 +8,7 @@ import { ParametrosService } from 'src/app/services/parametros.service';
 import { Activo } from '../../interfaces/activos.interfaces';
 import { ActivoService } from '../../services/activo.service';
 import { ActivosModalComponent } from '../activos-modal/activos-modal.component';
+import { CompraModalComponent } from '../../../compras/pages/compra-modal/compra-modal.component';
 
 @Component({
   selector: 'app-activos',
@@ -57,7 +58,7 @@ export class ActivosComponent implements OnInit {
   }
 
   getActivos(){
-    this.activoService.getActivos()
+    this.activoService.getCotizaciones()
       .subscribe( resp => {
         if(resp.ok===true){
           this.activosList=resp.data!;
@@ -66,7 +67,7 @@ export class ActivosComponent implements OnInit {
   }
 
   editar(uid:string){
-    this.activoService.getActivos(uid)
+    this.activoService.getActivo(uid)
       .subscribe( resp => {
         if(resp.ok === true) {
 
@@ -79,7 +80,7 @@ export class ActivosComponent implements OnInit {
             }
           }).afterClosed().subscribe( resp => {
             if(resp === true){
-              this.getActivos  ();
+              this.getActivos();
               this.abrirSnackBar("Modificación Exitosa");
             }else{
               this.abrirSnackBar("Error al Modificar");
@@ -87,6 +88,25 @@ export class ActivosComponent implements OnInit {
           });
         }
       });
+  }
+
+  comprar(uid:string){
+    const nombreActivo = this.activosList.find( x => x.uid == uid)?.nombre;
+    const uidActivo = uid;
+    const modalCompra = this.dialog.open( CompraModalComponent, {
+      width: "500px",
+      disableClose: true,
+      data: {
+        nombreActivo,
+        uidActivo
+      }
+    })
+    modalCompra.afterClosed().subscribe( resp => {
+      if(resp===true){
+        this.getActivos();
+        this.abrirSnackBar("Compra Exitosa");
+      }
+    })
   }
   
   eliminar(uid:string){
