@@ -13,10 +13,10 @@ export class LoginComponent implements OnInit {
 
   hide: Boolean = true;
   formLogin: FormGroup = this.fb.group({
-    usuario : ['dyeqos@gmail.com',[Validators.required, Validators.email, Validators.maxLength(30)] ],
-    password: ['123456',[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
-    //usuario : ['',[Validators.required, Validators.email, Validators.maxLength(30)] ],
-    //password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
+    //usuario : ['dyeqos@gmail.com',[Validators.required, Validators.email, Validators.maxLength(30)] ],
+    //password: ['123456',[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
+    usuario : ['',[Validators.required, Validators.email, Validators.maxLength(30)] ],
+    password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
   });
   
   constructor( private router: Router,
