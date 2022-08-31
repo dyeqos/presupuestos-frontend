@@ -1,14 +1,15 @@
 <div class="row">
-  <h1>
-    <mat-icon class="titulo">store_mall_directory</mat-icon>
-    <span> Cotizaciones </span>
+  <div class="col">
+    <h1>
+      <mat-icon class="titulo">store_mall_directory</mat-icon>
+      <span> Cotizaciones </span> 
+    </h1>
     <button mat-raised-button 
-            color="primary" 
-            (click)="abrirModal()"
-            class="titulo">
+      color="primary"
+      (click)="abrirModal()">
       <mat-icon>add</mat-icon> Agregar Activo
     </button>
-  </h1>
+  </div>
 </div>
 
 <div *ngIf="activosList && activosList.length > 0; else activoVacio" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">

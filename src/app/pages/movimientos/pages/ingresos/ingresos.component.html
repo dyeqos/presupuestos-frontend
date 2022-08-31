@@ -2,7 +2,8 @@
     
     <form autocomplete = "off"
           [formGroup]  = "formIngreso"
-          (ngSubmit)   = "guardarIngreso()">
+          (ngSubmit)   = "guardarIngreso(formDirective)"
+          #formDirective="ngForm">
           
       <mat-card-header>
         <mat-card-title>Ingreso</mat-card-title>
@@ -34,7 +35,7 @@
               </mat-option>
             </mat-select>
             <mat-error>
-                Revise el Numero de Cuenta
+              Revise el Número de cuenta
             </mat-error>
         </mat-form-field>
 
@@ -48,7 +49,7 @@
             </mat-option>
           </mat-select>
           <mat-error>
-              Revise el Numero de Cuenta
+              Revise el Motivo
           </mat-error>
       </mat-form-field>
 

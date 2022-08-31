@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Cuenta } from 'src/app/pages/cuentas/interfaces/cuenta.interfaces';
+import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import * as moment from 'moment';
+
 import { CuentasService } from '../../../cuentas/services/cuentas.service';
 import { ParametrosService } from '../../../../services/parametros.service';
+import { MovimientosService } from '../../services/movimientos.service';
+
+import { Cuenta } from 'src/app/pages/cuentas/interfaces/cuenta.interfaces';
 import { Parametro } from '../../../../interfaces/parametros.interfaces';
 import { Ingreso } from '../../interfaces/ingresos.interfaces';
-import * as moment from 'moment';
-import { MovimientosService } from '../../services/movimientos.service';
 
 @Component({
   selector: 'app-ingresos',
@@ -32,7 +36,8 @@ export class IngresosComponent implements OnInit {
   constructor( private fb: FormBuilder,
                private cs: CuentasService,
                private ps: ParametrosService,
-               private ms: MovimientosService ) { }
+               private ms: MovimientosService,
+               private _snackBar: MatSnackBar, ) { }
 
   ngOnInit(): void {
     this.listarCuentas();
@@ -61,7 +66,7 @@ export class IngresosComponent implements OnInit {
       })
   }
 
-  guardarIngreso(){
+  guardarIngreso(formDirective: FormGroupDirective){
     if( this.formIngreso.invalid ){
       this.formIngreso.markAllAsTouched();
       return;
@@ -80,12 +85,23 @@ export class IngresosComponent implements OnInit {
     this.ms.postMovimientoIngreso(this.ingreso)
       .subscribe( resp => {
         if(resp.ok === true ){
-
+          this.abrirSnackBar("Registro Exitoso");
+          this.formIngreso.reset();
+          formDirective.resetForm();
+        }else{
+          this.abrirSnackBar("Error al Registrar");
         }
-        console.log(resp);
+      });
 
-      })
 
+  }
+
+  abrirSnackBar(msg: String){
+    this._snackBar.open(msg.toString(),'Aceptar',{
+      horizontalPosition : 'end',
+      verticalPosition: 'top',
+      duration: 1500
+    })
   }
 
 }

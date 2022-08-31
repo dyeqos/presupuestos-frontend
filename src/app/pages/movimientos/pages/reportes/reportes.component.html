@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col">
+      <h1>
+        <mat-icon class="titulo">credit_card</mat-icon>
+        <span> Reportes </span> 
+      </h1>
+    </div>
+</div>
+
+<mat-accordion class="acordion-header" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filtrar
+      </mat-panel-title>
+      <mat-panel-description>
+        Buscar movimientos de cuentas
+        <mat-icon>search</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field appearance="fill" class="correccionError">
+      <mat-label>Número de Cuenta</mat-label>
+      <mat-select
+        formControlName = "cuenta">
+        <mat-option *ngFor="let cuenta of numeroCuenta" 
+                    [value]="cuenta.uid">
+                    {{cuenta.banco.nombre}}: {{cuenta.descripcion}} N° {{ cuenta.numero_cuenta }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="example-form-field">
+      <mat-label>Rango de Fechas</mat-label>
+      <mat-date-range-input [rangePicker]="rangePicker">
+        <input matStartDate placeholder="Fecha Inicio">
+        <input matEndDate placeholder="Fecha Fin">
+      </mat-date-range-input>
+      <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+      <mat-date-range-picker #rangePicker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDateRangePickerApply>Aceptar</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de Movimiento</mat-label>
+      <mat-select
+        formControlName = "cuenta">
+        <mat-option *ngFor="let tipoMovimiento of tipoMovimientos" 
+                    [value]="tipoMovimiento.id">
+                    {{tipoMovimiento.descripcion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button 
+      color="primary"
+      disabled="true">
+      Buscar
+    </button>
+    <button mat-button 
+      color="primary"
+      disabled="true">
+      Restablecer
+    </button>
+
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+<br>
+
+<table *ngIf="movimientosList && movimientosList.length>0; else movimientosVacio" mat-table [dataSource]="movimientosList" class="mat-elevation-z8 matTable">
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef> FECHA </th>
+      <td mat-cell *matCellDef="let movimiento">{{movimiento.fecha}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="numero_cuenta">
+      <th mat-header-cell *matHeaderCellDef> N° DE movimiento </th>
+      <td mat-cell *matCellDef="let movimiento"> {{movimiento.numero_cuenta}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="opcion">
+      <th mat-header-cell *matHeaderCellDef> OPCIONES </th>
+      <td mat-cell *matCellDef="let movimiento"> 
+        <button mat-icon-button 
+                (click)="detalle()"
+                color="accent">
+          <mat-icon>edit</mat-icon> 
+        </button>
+        <button mat-icon-button 
+                (click)="revertir()"
+                disabled=""
+                color="accent">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayHeader"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayHeader;"></tr>
+</table>
+<ng-template #movimientosVacio class="example-list">
+<div class="example-box">
+    Agrege activos para ser cotizados...
+</div>
+</ng-template>

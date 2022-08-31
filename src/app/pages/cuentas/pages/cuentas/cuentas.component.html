@@ -14,7 +14,7 @@
 
 
 
-<table *ngIf="cuentasList" mat-table [dataSource]="cuentasList" class="mat-elevation-z8 matTable">
+<table *ngIf="cuentasList && cuentasList.length>0; else cuentasVacia" mat-table [dataSource]="cuentasList" class="mat-elevation-z8 matTable">
 
   <ng-container matColumnDef="banco">
     <th mat-header-cell *matHeaderCellDef> BANCO </th>
@@ -25,7 +25,6 @@
     <th mat-header-cell *matHeaderCellDef> N° DE CUENTA </th>
     <td mat-cell *matCellDef="let cuenta"> {{cuenta.numero_cuenta}} </td>
   </ng-container>
-
 
   <ng-container matColumnDef="opcion">
     <th mat-header-cell *matHeaderCellDef> OPCIONES </th>
@@ -46,3 +45,8 @@
   <tr mat-header-row *matHeaderRowDef="displayHeader"></tr>
   <tr mat-row *matRowDef="let row; columns: displayHeader;"></tr>
 </table>
+<ng-template #cuentasVacia class="example-list">
+  <div class="example-box">
+    Sin cuentas para mostrar...
+  </div>
+</ng-template>

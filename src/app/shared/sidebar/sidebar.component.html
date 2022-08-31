@@ -1,5 +1,9 @@
 <mat-sidenav-container fullscreen>
 
+    <div *ngIf="loaderService.isLoader | async" class="loaderContainer">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <!-- <mat-spinner style="top: 50%; left:50%;"></mat-spinner> -->
+    </div>
     <mat-sidenav #sidenav>
         <mat-toolbar color="primary">
             <span>Menú</span>
@@ -38,6 +42,12 @@
                         <span>Movimientos</span>
                     </mat-expansion-panel-header>
                     
+                    <a routerLink="/movimientos/"
+                        mat-list-item
+                        (click)="sidenav.toggle()">
+                        <mat-icon mat-list-icon>description</mat-icon>
+                        <span>Reportes</span>
+                    </a>
                     <a routerLink="/movimientos/ingresos"
                         mat-list-item
                         (click)="sidenav.toggle()">

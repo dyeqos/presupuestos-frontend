@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,12 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  user: string = environment.user;
+  pass: string = environment.pass;
   hide: Boolean = true;
   formLogin: FormGroup = this.fb.group({
-    //usuario : ['dyeqos@gmail.com',[Validators.required, Validators.email, Validators.maxLength(30)] ],
-    //password: ['123456',[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
-    usuario : ['',[Validators.required, Validators.email, Validators.maxLength(30)] ],
-    password: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
+    usuario : [ this.user ,[Validators.required, Validators.email, Validators.maxLength(30)] ],
+    password: [ this.pass ,[Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
   });
   
   constructor( private router: Router,

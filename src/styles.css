@@ -34,3 +34,18 @@ input.numero-right-align::-webkit-inner-spin-button {
 input.numero-right-align {
     -moz-appearance: textfield;
 }
+
+
+.loaderContainer{
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+}
+.loaderSpinner{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.8;
+    z-index: 999;
+}

@@ -1,0 +1,9 @@
+.acordion-header .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+  
+mat-form-field {
+    display: block;
+    margin-top: 3px;
+}
