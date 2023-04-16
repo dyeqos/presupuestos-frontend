@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
 import { PagesComponent } from './pages/pages.component';
-import { MovimientosModule } from './pages/movimientos/movimientos.module';
+//import { MovimientosModule } from './pages/movimientos/movimientos.module';
 
 const routes: Routes = [
   {

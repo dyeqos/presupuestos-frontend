@@ -1,15 +1,129 @@
+<div class="row">
+  <div class="col">
+    <h1>
+      <mat-icon class="titulo">local_atm</mat-icon>
+      <span> Nuevo Egreso </span> 
+    </h1>
+  </div>
+</div>
 
-        <mat-card class="pt-5 pb-3 mat-elevation-z8">
-            <mat-card-header>
-                <mat-card-title>
-                <h1 class="fw-bold fs-1">BIENVENIDO<br>
-                    DE NUEVO
-                </h1>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="mt-4">
-            
-                <p>egresos works!</p>
-            
-            </mat-card-content>
-        </mat-card>
+<form autocomplete="off"
+      [formGroup]  = "formEgreso"
+      (ngSubmit)   = "guardarEgreso(formDirective)"
+      #formDirective="ngForm">
+  <div class="row">
+    <mat-form-field appearance="fill" class="col-6">
+        <mat-label> Fecha Compra </mat-label>
+        <input matInput
+               [matDatepicker]="dp3"
+               formControlName = "fecha">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        <mat-error>
+            Revise la Fecha de Compra
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-6">
+      <mat-label>Motivo Ingreso</mat-label>
+      <mat-select
+        formControlName = "motivo">
+        <mat-option *ngFor="let egreso of egresos" 
+                    [value]="egreso.nombre">
+                    {{egreso.nombre}}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+          Revise el Motivo
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="fill" class="col-10">
+        <mat-label>Número de Cuenta</mat-label>
+        <mat-select
+          formControlName = "cuenta">
+          <mat-option *ngFor="let cuenta of numerosCuenta" 
+                      [value]="cuenta.uid">
+                      {{cuenta.banco.nombre}}: {{cuenta.descripcion}} N° {{ cuenta.numero_cuenta }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Revise el Número de Cuenta
+        </mat-error>
+    </mat-form-field>
+    <button mat-fab color="primary" type="button" (click)="agregarDetalle()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+    
+  <div class="row">
+    <div class="col">
+      <h3>
+        <span> Detalles Egreso </span> 
+      </h3>
+    </div>
+  </div>
+
+  <div formArrayName="detalles" class="example-list" *ngIf="detalles.controls && detalles.controls.length>0; else detalleVacio"> 
+    <div *ngFor="let detalle of detalles.controls; let i = index">
+      <div class="row example-box" [formGroupName]="i">
+
+        <mat-form-field appearance="fill" class="col-3">
+          <mat-label>Cant</mat-label>
+          <input matInput
+                  type="number"
+                  class="example-right-align"
+                  formControlName="cantidad">
+          <mat-error>
+            Min. 1
+          </mat-error>                 
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="col-5">
+          <mat-label>Descripción</mat-label>
+          <input matInput 
+                  formControlName="detalle">
+          <mat-error>
+            Revise Descripción
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" floatLabel="always" class="col-3">
+          <mat-label>Monto</mat-label>
+          <input matInput
+                  type="number"
+                  class="example-right-align"
+                  formControlName="unitario"
+                  placeholder="0">
+          <span matSuffix>.00</span>
+          <mat-error>
+            Min. 1
+          </mat-error>                 
+        </mat-form-field>
+
+        <button mat-icon-button color="primary" 
+                class="col-1 btn-delete"
+                type="button"
+                (click)="quitarDetalle(i)">
+                <mat-icon>delete</mat-icon>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+
+  <ng-template #detalleVacio class="example-list">
+    <div class="example-box padd-box">
+        Sin detalles...
+    </div>
+  </ng-template>
+
+  <button mat-raised-button
+          color="primary"
+          type="submit">
+            Guardar
+  </button>
+
+</form>

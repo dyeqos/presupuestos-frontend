@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
+import { UtilitariosService } from '../Utilitarios/utilitarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class ValidatorService {
 public soloLetras: string = '([a-zA-Z]+) ([a-zA-Z]+)';
 public soloEmail : string = "^[a-z0-9.%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
-  constructor() { }
+  constructor( private util: UtilitariosService ) { }
 
   contrasenaIgual( dato1: string, dato2: string){
     return ( FormGroup: AbstractControl ): ValidationErrors | null => {
@@ -42,4 +43,27 @@ public soloEmail : string = "^[a-z0-9.%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
       
     }
   }
+
+  esFecha( fecha1: string, fecha2: string ){
+
+    return ( FormGroup: AbstractControl ): ValidationErrors | null => {
+      
+      const dt1 = FormGroup.get(fecha1)?.value;
+      const dt2 = FormGroup.get(fecha2)?.value;
+
+      if( dt1 !== "" || dt2!=="" ){
+        console.log("dat")
+        if( this.util.esFecha(dt1) && this.util.esFecha(dt2) ){
+          FormGroup.get(fecha1)?.setErrors( null );
+          return null;
+        }
+        FormGroup.get(fecha1)?.setErrors({ noValid: true });
+        return { noValid: true}
+      }
+      FormGroup.get(fecha1)?.setErrors( null );
+      return null;
+    }
+
+  }
+
 }

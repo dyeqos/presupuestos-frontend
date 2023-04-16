@@ -2,13 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as moment from 'moment';
 
 import { ComprasService } from '../../services/compras.service';
 import { CuentasService } from '../../../cuentas/services/cuentas.service';
 
 import { Cuenta } from 'src/app/pages/cuentas/interfaces/cuenta.interfaces';
 import { Movimiento } from '../../interfaces/compras.interfaces';
+import { UtilitariosService } from '../../../../shared/Utilitarios/utilitarios.service';
 
 @Component({
   selector: 'app-compra-modal',
@@ -26,7 +26,7 @@ export class CompraModalComponent implements OnInit {
   formCompra: FormGroup = this.fb.group({
     lugar_compra : [ '', [Validators.required, Validators.minLength(5), Validators.maxLength(50)] ],
     cuenta       : [ '', [Validators.required] ],
-    fecha_compra : [ {value: this.hoy, disabled: true}, [Validators.required] ],
+    fecha_movimiento : [ {value: this.hoy, disabled: true}, [Validators.required] ],
   });
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,
@@ -34,7 +34,8 @@ export class CompraModalComponent implements OnInit {
                private _snackBar: MatSnackBar,
                private fb: FormBuilder,           
                private cs: CuentasService,
-               private cos: ComprasService ) { }
+               private cos: ComprasService,
+               private util: UtilitariosService ) { }
 
   ngOnInit(): void {
     this.getCuentas();
@@ -57,7 +58,7 @@ export class CompraModalComponent implements OnInit {
     }
     
     this.movimiento = {
-      fecha_compra :  moment(this.formCompra.controls['fecha_compra'].value).format('YYYY-MM-DD'),
+      fecha_movimiento : this.util.aFecha(this.formCompra.controls['fecha_movimiento'].value,'YYYY-MM-DD'),
       cuenta : this.formCompra.controls['cuenta'].value,
       lugar_compra : this.formCompra.controls['lugar_compra'].value.trim().toUpperCase(),
     }

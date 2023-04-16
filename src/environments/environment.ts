@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:4000/api',
-  user: 'dcalvi@gmail.com',
+  user: 'dyeqos@gmail.com',
   pass: '123456'
 };
 

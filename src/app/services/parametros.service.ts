@@ -38,4 +38,9 @@ export class ParametrosService {
     return this.http.get<ParametroResponse>(url);
   }
 
+  getTiposEgresos(){
+    const url = `${this.baseUrl}/egresos`;
+    return this.http.get<ParametroResponse>(url);
+  }
+
 }

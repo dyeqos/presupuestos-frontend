@@ -1,4 +1,4 @@
-export interface ingresoResponse{
+export interface IngresoResponse{
     ok: boolean,
     msg: string,
     data?: string
@@ -6,7 +6,7 @@ export interface ingresoResponse{
 
 export interface Ingreso{
     //movimiento
-    fecha_compra : string,
+    fecha_movimiento : string,
     cuenta       : string,
     lugar_compra : string,
     //detalleMovimiento

@@ -19,6 +19,11 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
+    <form autocomplete = "off"
+          [formGroup]  = "formReport"
+          (ngSubmit)   = "filtrar(formDirective)"
+          #formDirective="ngForm">
+
     <mat-form-field appearance="fill" class="correccionError">
       <mat-label>Número de Cuenta</mat-label>
       <mat-select
@@ -32,25 +37,28 @@
 
     <mat-form-field appearance="fill" class="example-form-field">
       <mat-label>Rango de Fechas</mat-label>
-      <mat-date-range-input [rangePicker]="rangePicker">
-        <input matStartDate placeholder="Fecha Inicio">
-        <input matEndDate placeholder="Fecha Fin">
+      <mat-date-range-input [rangePicker]="rangePicker" disabled="true">
+        <input matStartDate placeholder="Fecha Inicio" formControlName = "fecha_desde">
+        <input matEndDate placeholder="Fecha Fin" formControlName = "fecha_hasta">
       </mat-date-range-input>
       <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-      <mat-date-range-picker #rangePicker>
+      <mat-datepicker-toggle matSuffix [for]="rangePicker" disabled="false"></mat-datepicker-toggle>
+      <mat-date-range-picker #rangePicker disabled="false">
         <mat-date-range-picker-actions>
           <button mat-button matDateRangePickerCancel>Cancelar</button>
           <button mat-raised-button color="primary" matDateRangePickerApply>Aceptar</button>
         </mat-date-range-picker-actions>
       </mat-date-range-picker>
+      <mat-error>
+        Revise el Nombre
+    </mat-error>
     </mat-form-field>
 
     
     <mat-form-field appearance="fill">
       <mat-label>Tipo de Movimiento</mat-label>
       <mat-select
-        formControlName = "cuenta">
+        formControlName = "lugar_compra">
         <mat-option *ngFor="let tipoMovimiento of tipoMovimientos" 
                     [value]="tipoMovimiento.id">
                     {{tipoMovimiento.descripcion}}
@@ -59,34 +67,46 @@
     </mat-form-field>
 
     <button mat-raised-button 
-      color="primary"
-      disabled="true">
+      color="primary">
       Buscar
     </button>
-    <button mat-button 
-      color="primary"
-      disabled="true">
+    <button mat-button
+      type="button"
+      (click)="reset(formDirective)">
       Restablecer
     </button>
-
+  </form>
+  
   </mat-expansion-panel>
 
 </mat-accordion>
 
 <br>
 
+<div *ngIf="movimientosList && cuentaSeleccionado && saldoCuenta>=0" class="example-list">
+  <div class="example-box text-align">
+      Saldo {{ saldoCuenta | currency:"Bs " }}
+  </div>
+  <br>
+</div>
+
+
 <table *ngIf="movimientosList && movimientosList.length>0; else movimientosVacio" mat-table [dataSource]="movimientosList" class="mat-elevation-z8 matTable">
 
-    <ng-container matColumnDef="fecha">
-      <th mat-header-cell *matHeaderCellDef> FECHA </th>
-      <td mat-cell *matCellDef="let movimiento">{{movimiento.fecha}}</td>
+    <ng-container matColumnDef="fecha_movimiento">
+      <th mat-header-cell *matHeaderCellDef> FECHA  </th>
+      <td mat-cell *matCellDef="let movimiento">{{movimiento.fecha_movimiento | date: 'dd/MM/yyyy' }}</td>
     </ng-container>
   
-    <ng-container matColumnDef="numero_cuenta">
-      <th mat-header-cell *matHeaderCellDef> N° DE movimiento </th>
-      <td mat-cell *matCellDef="let movimiento"> {{movimiento.numero_cuenta}} </td>
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> TOTAL </th>
+      <td mat-cell *matCellDef="let movimiento"> {{movimiento.total | currency:"Bs "}} </td>
     </ng-container>
   
+    <ng-container matColumnDef="lugar_compra">
+      <th mat-header-cell *matHeaderCellDef> TIPO </th>
+      <td mat-cell *matCellDef="let movimiento"> {{movimiento.lugar_compra}} </td>
+    </ng-container>
   
     <ng-container matColumnDef="opcion">
       <th mat-header-cell *matHeaderCellDef> OPCIONES </th>
@@ -108,7 +128,7 @@
     <tr mat-row *matRowDef="let row; columns: displayHeader;"></tr>
 </table>
 <ng-template #movimientosVacio class="example-list">
-<div class="example-box">
-    Agrege activos para ser cotizados...
-</div>
+  <div class="example-box">
+      Sin resultados...
+  </div>
 </ng-template>

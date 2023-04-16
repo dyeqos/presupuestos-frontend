@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { Ingreso } from '../interfaces/ingresos.interfaces';
 import { MovimientosResponse } from '../interfaces/movimientos.interfaces';
+import { BusquedaMovimientos } from '../interfaces/busqueda.interfaces';
+import { Egreso } from '../interfaces/egresos.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +25,19 @@ export class MovimientosService {
       .set('x-token', this.authService.token )
     return this.http.post<MovimientosResponse>(url,datos,{headers});
   }
+
+  postMovimientoEgreso(datos: Egreso ){
+    const url = `${this.baseUrl}/movimientos/egreso`;
+    const headers = new HttpHeaders()
+      .set('x-token', this.authService.token )
+    return this.http.post<MovimientosResponse>(url,datos,{headers});
+  }
+
+  postGetMovimientos( datos: BusquedaMovimientos ){
+    const url = `${this.baseUrl}/movimientos/`;
+    return this.http.post<MovimientosResponse>(url,datos);
+  }
+
+
 
 }

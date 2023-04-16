@@ -2,3 +2,46 @@ mat-card {
     max-width: 400px;
     text-align: left;
 }
+
+mat-form-field {
+    display: block;
+    margin-top: 10px;
+}
+button{
+  margin-top: 10px;
+}
+.example-right-align {
+text-align: right;
+}
+
+.btn-delete{
+  margin-top: 0;
+  width: 30px;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.example-box {
+  background: #424242 ;
+  padding: 3px 1px;
+  border-bottom: solid 1px #595959;
+  color:#ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 14px;
+}
+
+.padd-box{
+  padding: 25px 10px;
+}

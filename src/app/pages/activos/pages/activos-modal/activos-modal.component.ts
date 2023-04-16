@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as moment from 'moment';
 
 import { ActivoService } from '../../services/activo.service';
 
 import { Activo } from '../../interfaces/activos.interfaces';
+import { UtilitariosService } from '../../../../shared/Utilitarios/utilitarios.service';
 
 @Component({
   selector: 'app-activos-modal',
@@ -29,7 +29,8 @@ export class ActivosModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<ActivosModalComponent>,
               private fb: FormBuilder,
-              private activoService: ActivoService) { }
+              private activoService: ActivoService,
+              private util: UtilitariosService,) { }
 
   ngOnInit(): void {
     this.cargarFormulario();
@@ -57,7 +58,7 @@ export class ActivosModalComponent implements OnInit {
     this.activo.detalle = this.formActivo.controls['detalle'].value.trim().toUpperCase();
     this.activo.tipo_activo = this.formActivo.controls['tipo_activo'].value;
     this.activo.costo = this.formActivo.controls['costo'].value;
-    this.activo.fecha = moment(this.formActivo.controls['fecha'].value).format('YYYY-MM-DD') ; 
+    this.activo.fecha = this.util.aFecha(this.formActivo.controls['fecha'].value,'YYYY-MM-DD') ; 
 
     if( typeof this.activo.uid !== 'undefined' ){
       this.activoService.updateActivo(this.activo)

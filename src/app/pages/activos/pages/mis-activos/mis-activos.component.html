@@ -6,7 +6,7 @@
   </div>
   
   <div *ngIf="activosList && activosList.length > 0; else activoVacio">
-      <div class="example-box" *ngFor="let activo of activosList" cdkDrag>
+      <div class="example-box" *ngFor="let activo of activosList">
         {{activo.nombre}} <span class="spacer"></span> {{activo.costo |  number:'1.2-2' }} Bs
         <button mat-icon-button [matMenuTriggerFor]="menu" >
           <mat-icon>more_vert</mat-icon>

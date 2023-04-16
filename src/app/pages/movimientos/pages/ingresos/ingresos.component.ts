@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import * as moment from 'moment';
-
 import { CuentasService } from '../../../cuentas/services/cuentas.service';
 import { ParametrosService } from '../../../../services/parametros.service';
 import { MovimientosService } from '../../services/movimientos.service';
+import { UtilitariosService } from 'src/app/shared/Utilitarios/utilitarios.service';
 
 import { Cuenta } from 'src/app/pages/cuentas/interfaces/cuenta.interfaces';
 import { Parametro } from '../../../../interfaces/parametros.interfaces';
@@ -20,7 +19,7 @@ import { Ingreso } from '../../interfaces/ingresos.interfaces';
 export class IngresosComponent implements OnInit {
 
   date = new Date(); 
-  numeroCuenta! : Cuenta[];
+  numeroCuenta! : Cuenta[]; 
   ingresos! : Parametro[];
 
   ingreso!: Ingreso;
@@ -37,6 +36,7 @@ export class IngresosComponent implements OnInit {
                private cs: CuentasService,
                private ps: ParametrosService,
                private ms: MovimientosService,
+               private us: UtilitariosService,
                private _snackBar: MatSnackBar, ) { }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class IngresosComponent implements OnInit {
     }
   
     this.ingreso = {
-      fecha_compra : moment(this.formIngreso.controls['fecha'].value).format('YYYY-MM-DD') ,
+      fecha_movimiento : this.us.aFecha(this.formIngreso.controls['fecha'].value,'YYYY-MM-DD'),
       cuenta       : this.formIngreso.controls['cuenta'].value,
       lugar_compra : this.formIngreso.controls['detalle'].value.trim().toUpperCase(),
       //detalleMovimiento

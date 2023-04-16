@@ -7,3 +7,19 @@ mat-form-field {
     display: block;
     margin-top: 3px;
 }
+.example-box {
+    background: #424242 ;
+    padding: 20px 10px;
+    border-bottom: solid 1px #595959;
+    color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.text-align{
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 18px;
+    
+}
